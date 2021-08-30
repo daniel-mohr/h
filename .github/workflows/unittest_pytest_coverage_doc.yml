@@ -79,6 +79,8 @@ jobs:
       run: env python3 setup.py run_pytest --parallel --coverage
 
   windows-2016_test:
+    if: ${{ false }}
+    # we need setuputils to create binaries for windows
     # https://github.com/actions/virtual-environments/blob/main/images/win/Windows2016-Readme.md
     runs-on: windows-2016
     steps:
