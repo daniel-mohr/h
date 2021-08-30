@@ -21,7 +21,7 @@ jobs:
     - name: run pfu
       run: |
         which pfu.py
-        pfu.py
+        pfu.py -h
     - name: unittest
       run: env python3 setup.py run_unittest
     - name: install dependencies for pytest (ubuntu packages)
