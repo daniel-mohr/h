@@ -64,6 +64,13 @@ jobs:
       run: |
         which pfu.py
         pfu.py -h
+    - name: foo bar
+      run: |
+        mkdir foo
+        pfu.py simscrub -config_data_directory foo
+        pfu.py simscrub
+        pfu.py simscrub -dir .
+        pfu.py simscrub
     - name: unittest
       run: env python3 setup.py run_unittest
     - name: install dependencies via pip3
@@ -89,6 +96,13 @@ jobs:
       run: |
         Get-Command pfu.py
         pfu.py -h
+    - name: foo bar
+      run: |
+        mkdir foo
+        pfu.py simscrub -config_data_directory foo
+        pfu.py simscrub
+        pfu.py simscrub -dir .
+        pfu.py simscrub
     - name: unittest
       run: python setup.py run_unittest
     - name: pytest
@@ -112,6 +126,13 @@ jobs:
       run: |
         Get-Command pfu.py
         pfu.py -h
+    - name: foo bar
+      run: |
+        mkdir foo
+        pfu.py simscrub -config_data_directory foo
+        pfu.py simscrub
+        pfu.py simscrub -dir .
+        pfu.py simscrub
     - name: unittest
       run: python setup.py run_unittest
     - name: pytest
