@@ -96,19 +96,27 @@ jobs:
       run: |
         Get-Command pfu.py
         pfu.py -h
-    - name: foo bar
-      run: |
-        mkdir foo
-        pfu.py simscrub -config_data_directory foo
-        pfu.py simscrub
-        pfu.py simscrub -dir .
-        pfu.py simscrub
+    - name: Get-Command pfu
+      run: Get-Command pfu.py
+    - name: run pfu
+      run: pfu.py -h
+    - name: foo1
+      run: mkdir foo
+    - name: foo2
+      run: pfu.py simscrub -config_data_directory foo
+    - name: foo3
+      run: pfu.py simscrub
+    - name: foo4
+      run: pfu.py simscrub -dir .
+    - name: foo5
+      run: pfu.py simscrub
     - name: unittest
       run: python setup.py run_unittest
     - name: pytest
       run: python setup.py run_pytest --parallel --coverage
 
   windows-2019_test:
+    if: ${{ false }}
     # https://github.com/actions/virtual-environments/blob/main/images/win/Windows2019-Readme.md
     runs-on: windows-2019
     steps:
