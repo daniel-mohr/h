@@ -16,8 +16,10 @@ jobs:
     - uses: actions/checkout@v2
     - name: check all modules available
       run: env python3 setup.py check_modules
+    - name: install dependencies (ubuntu packages)
+      run: sudo apt install python3-setuptools
     - name: install pfu
-      run: sudo python3 setup.py install
+      run: pip3 install .
     - name: run pfu
       run: |
         which pfu
