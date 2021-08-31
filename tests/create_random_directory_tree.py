@@ -19,6 +19,11 @@ def create_random_directory_tree(
     population = bytes(list(range(65, 91))).decode() + bytes(list(range(97, 123))).decode()
     population += bytes(list(range(48, 58))).decode()
     #population += b'._-'.decode()
+    population += b'_-'.decode()
+    if os.name == 'posix':
+        # windows is not able to handle '.' or ' ' at the end of a file name
+        # https://docs.microsoft.com/en-us/windows/win32/fileio/naming-a-file
+        population += b'.'.decode()
     my_number_dirs = number_dirs
     if my_number_dirs is None:
         my_number_dirs = random.randint(1, 6)
