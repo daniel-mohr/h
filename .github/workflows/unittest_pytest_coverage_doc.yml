@@ -9,6 +9,7 @@ on:
 jobs:
 
   ubuntu-1804_test_doc:
+    if: ${{ false }}
     # if: ${{ false }}
     # https://github.com/actions/virtual-environments/blob/main/images/linux/Ubuntu1804-README.md
     runs-on: ubuntu-18.04
@@ -32,6 +33,7 @@ jobs:
       run: env python3 setup.py run_pytest --parallel --coverage
 
   ubuntu-2004_test_doc:
+    if: ${{ false }}
     # https://github.com/actions/virtual-environments/blob/main/images/linux/Ubuntu2004-README.md
 #    runs-on: ubuntu-latest
     runs-on: ubuntu-20.04
@@ -55,6 +57,7 @@ jobs:
       run: env python3 setup.py run_pytest --parallel --coverage
 
   macos-1015_test:
+    if: ${{ false }}
     # https://github.com/actions/virtual-environments/blob/main/images/macos/macos-10.15-Readme.md
     runs-on: macos-10.15
     steps:
@@ -98,22 +101,22 @@ jobs:
       run: python setup.py install
     - name: run pfu
       run: |
-        Get-Command pfu.py
-        pfu.py -h
+        Get-Command pfu
+        pfu -h
     - name: Get-Command pfu
-      run: Get-Command pfu.py
+      run: Get-Command pfu
     - name: run pfu
-      run: pfu.py -h
+      run: pfu -h
     - name: foo1
       run: mkdir foo
     - name: foo2
-      run: pfu.py simscrub -config_data_directory foo
+      run: pfu simscrub -config_data_directory foo
     - name: foo3
-      run: pfu.py simscrub
+      run: pfu simscrub
     - name: foo4
-      run: pfu.py simscrub -dir .
+      run: pfu simscrub -dir .
     - name: foo5
-      run: pfu.py simscrub
+      run: pfu simscrub
     - name: unittest
       run: python setup.py run_unittest
     - name: pytest
