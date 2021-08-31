@@ -103,6 +103,8 @@ jobs:
       run: |
         Get-Command pfu
         pfu -h
+    - name: speed_test
+      run: pfu speed_test -f a -bytes 42 -count 6
     - name: unittest
       run: python setup.py run_unittest
     - name: pytest
