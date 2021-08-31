@@ -103,20 +103,6 @@ jobs:
       run: |
         Get-Command pfu
         pfu -h
-    - name: Get-Command pfu
-      run: Get-Command pfu
-    - name: run pfu
-      run: pfu -h
-    - name: foo1
-      run: mkdir foo
-    - name: foo2
-      run: pfu simscrub -config_data_directory foo
-    - name: foo3
-      run: pfu simscrub
-    - name: foo4
-      run: pfu simscrub -dir .
-    - name: foo5
-      run: pfu simscrub
     - name: unittest
       run: python setup.py run_unittest
     - name: pytest
