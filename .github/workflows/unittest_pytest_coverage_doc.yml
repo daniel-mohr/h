@@ -105,7 +105,6 @@ jobs:
       run: python setup.py run_pytest --parallel --coverage
 
   windows-2019_test:
-    if: ${{ false }}
     # https://github.com/actions/virtual-environments/blob/main/images/win/Windows2019-Readme.md
     runs-on: windows-2019
     steps:
