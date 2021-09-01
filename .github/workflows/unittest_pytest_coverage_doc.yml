@@ -98,12 +98,32 @@ jobs:
         usesh: true
         prepare: pkg install -y devel/py-setuptools devel/py-pytest devel/py-pytest-cov devel/py-pytest-xdist
         run: |
-          set -x
+          set -e -x
           pwd
           ls -lah
           whoami
           freebsd-version
-          which python
           which python3.6
           which python3.7
           which python3.8
+          echo "###### python3.6 ######"
+          python3.6 setup.py install --record installed_files.txt
+          which pfu
+          pfu -h
+          python3.6 setup.py run_unittest
+          python3.6 setup.py run_pytest --parallel --coverage
+          cat installed_files.txt | xargs rm -rf && echo "uninstalled/removed: "$(cat installed_files.txt)
+          echo "###### python3.7 ######"
+          python3.7 setup.py install --record installed_files.txt
+          which pfu
+          pfu -h
+          python3.7 setup.py run_unittest
+          python3.7 setup.py run_pytest --parallel --coverage
+          cat installed_files.txt | xargs rm -rf && echo "uninstalled/removed: "$(cat installed_files.txt)
+          echo "###### python3.8 ######"
+          python3.8 setup.py install --record installed_files.txt
+          which pfu
+          pfu -h
+          python3.8 setup.py run_unittest
+          python3.8 setup.py run_pytest --parallel --coverage
+          cat installed_files.txt | xargs rm -rf && echo "uninstalled/removed: "$(cat installed_files.txt)
