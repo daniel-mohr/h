@@ -70,6 +70,7 @@ def create_subparser_check_checksum(subparsers):
         'All hash files and data files have to be in this directory tree or ' +
         'these directory trees.',
         metavar='dir')
+    # pep8: disable=W605
     parser.add_argument(
         '-hash_extension',
         nargs="+",
