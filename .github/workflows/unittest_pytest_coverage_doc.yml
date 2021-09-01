@@ -96,12 +96,14 @@ jobs:
       uses: vmactions/freebsd-vm@v0.1.5
       with:
         usesh: true
-        prepare: pkg install -y curl
+        prepare: pkg install -y devel/py-setuptools devel/py-pytest devel/py-pytest-cov devel/py-pytest-xdist
         run: |
+          set -x
           pwd
           ls -lah
           whoami
-          env
           freebsd-version
-
-
+          which python
+          which python3.6
+          which python3.7
+          which python3.8
