@@ -20,7 +20,6 @@ jobs:
       run: pep8 --show-source --show-pep8 --statistics $(find -name "*.py")
 
   ubuntu_test_doc:
-    if: ${{ false }}
     needs: pep8_check
     strategy:
       matrix:
@@ -28,15 +27,24 @@ jobs:
         # https://github.com/actions/virtual-environments/blob/main/images/linux/Ubuntu2004-README.md
         # we could also use: ubuntu-latest
         os: [ubuntu-18.04, ubuntu-20.04]
+        install_method: [basic, pip]
     runs-on: ${{ matrix.os }}
     steps:
     - uses: actions/checkout@v2
     - name: install dependencies (ubuntu packages)
+      if: matrix.install_method == 'basic'
       run: sudo apt install python3-setuptools hashdeep
+    - name: install dependencies (ubuntu packages)
+      if: matrix.install_method == 'pip'
+      run: sudo apt install python3-setuptools python3-pip hashdeep
     - name: check all modules available
       run: env python3 setup.py check_modules
-    - name: install pfu
+    - name: install pfu with python
+      if: matrix.install_method == 'basic'
       run: sudo python3 setup.py install
+    - name: install pfu with pip
+      if: matrix.install_method == 'pip'
+      run: sudo pip3 install .
     - name: run pfu
       run: |
         which pfu
@@ -115,7 +123,7 @@ jobs:
         usesh: true
         prepare: pkg install -y devel/py-setuptools devel/py-pytest devel/py-pytest-cov devel/py-pytest-xdist
         run: |
-          set -e -v -x
+          set -e -x
           pwd
           ls -lah
           whoami
@@ -142,11 +150,11 @@ jobs:
       - name: create test script for docker
         run: |
           echo "#!/bin/sh -l" > do_test
-          echo "set -e -v -x" >> do_test
-          echo "zypper --non-interactive install which python3 python3-setuptools python3-pip python3-pytest python3-pytest-cov python3-pytest-xdist hashdeep" >> do_test
+          echo "set -e -x" >> do_test
+          echo "zypper --non-interactive install which python3 python3-setuptools python3-pytest python3-pytest-cov python3-pytest-xdist hashdeep" >> do_test
           echo "env python3 -V" >> do_test
           echo "env python3 setup.py check_modules" >> do_test
-          echo "pip3 install ." >> do_test
+          echo "env python3 setup.py install" >> do_test
           echo "which pfu" >> do_test
           echo "pfu -h" >> do_test
           echo "env python3 setup.py run_unittest" >> do_test
