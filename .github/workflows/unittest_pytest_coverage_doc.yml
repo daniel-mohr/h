@@ -9,7 +9,6 @@ on:
 jobs:
 
   pep8_check:
-    if: ${{ false }}
     # https://github.com/actions/virtual-environments/blob/main/images/linux/Ubuntu2004-README.md
     runs-on: ubuntu-latest
     steps:
