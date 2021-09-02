@@ -142,7 +142,7 @@ jobs:
         run: |
           echo "#!/bin/sh -l" > do_test
           echo "set -e -v -x" >> do_test
-          echo "zypper --non-interactive install python3 python3-setuptools python3-pip python3-pytest python3-pytest-cov python3-pytest-xdist hashdeep" >> do_test
+          echo "zypper --non-interactive install which python3 python3-setuptools python3-pip python3-pytest python3-pytest-cov python3-pytest-xdist hashdeep" >> do_test
           echo "env python3 -V" >> do_test
           echo "env python3 setup.py check_modules" >> do_test
           echo "pip3 install ." >> do_test
